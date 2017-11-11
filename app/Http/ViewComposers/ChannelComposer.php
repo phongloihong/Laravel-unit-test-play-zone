@@ -7,12 +7,11 @@ use Illuminate\View\View;
 
 class ChannelComposer
 {
-	protected $channel = [];
+	protected $channels = [];
 
-	/**
-	 * Create channel composer
-	 * @return void
-	 */
+    /**
+     * Create channel composer
+     */
 	public function __construct()
 	{
 		$this->channels = Channel::all();

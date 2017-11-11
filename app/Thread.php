@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Thread extends Model
 {
     protected $guarded = [];
+    protected $with = ['creator', 'channel'];
 
     protected static function boot()
     {
@@ -43,7 +44,7 @@ class Thread extends Model
     /**
      * A thread may have many replies
      *
-     * @return  HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function replies()
     {
@@ -59,6 +60,11 @@ class Thread extends Model
         $this->replies()->create($reply);
     }
 
+    /**
+     * @param $query
+     * @param $filters
+     * @return mixed
+     */
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);
