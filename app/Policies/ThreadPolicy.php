@@ -11,6 +11,19 @@ class ThreadPolicy
     use HandlesAuthorization;
 
     /**
+     * Make specific user can delete all thread.
+     * Or can use to apply all policy in AuthServiceProvider
+     * @param $user
+     * @return bool
+     */
+//    public function before($user)
+//    {
+//        if ($user->name = 'Phong'){
+//            return true;
+//        }
+//    }
+
+    /**
      * Determine whether the user can view the thread.
      *
      * @param  \App\User  $user

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\RecordActivity;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Favoriable;
 /**
@@ -9,7 +10,7 @@ use App\Traits\Favoriable;
  */
 class Reply extends Model
 {
-    use Favoriable;
+    use Favoriable, RecordActivity;
 
     protected $guarded = [];
     protected $with = ['owner', 'favorites'];
@@ -17,5 +18,10 @@ class Reply extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function thread()
+    {
+        return $this->belongsTo(Thread::class);
     }
 }

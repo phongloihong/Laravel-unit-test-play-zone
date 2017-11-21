@@ -2,28 +2,34 @@
 
 namespace App;
 
+use App\Traits\RecordActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    use RecordActivity;
+
     protected $guarded = [];
     protected $with = ['creator', 'channel'];
 
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope('replyCount', function($builder) {
+        static::addGlobalScope('replyCount', function ($builder) {
             $builder->withCount('replies');
         });
 
-        static::deleting(function($builder) {
-            $builder->replies()->delete();
+        static::deleting(function ($builder) {
+            /**
+             * Need single delete model to trigger record activity
+             */
+            $builder->replies->each->delete();
         });
     }
 
-    /** 
-    * get a string path for the thread
-    */
+    /**
+     * get a string path for the thread
+     */
     public function path()
     {
         return "/threads/{$this->channel->slug}/{$this->id}";
