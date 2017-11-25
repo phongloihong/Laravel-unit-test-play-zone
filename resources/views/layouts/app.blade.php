@@ -23,6 +23,12 @@
         .flex {
             flex: 1;
         }
+
+        .mr-1 {
+            margin-right: 10px;
+        }
+
+        [v-cloak] { display: none }
     </style>
 </head>
 <body>
@@ -30,6 +36,7 @@
         @include('layouts.nav')
 
         @yield('content')
+        <flash message="{{ session('flash') }}"></flash>
     </div>
 
     <!-- Scripts -->

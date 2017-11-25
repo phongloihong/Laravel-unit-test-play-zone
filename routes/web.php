@@ -20,6 +20,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Thread
 Route::get('threads', 'ThreadController@index');
 Route::get('threads/create', 'ThreadController@create');
 Route::get('threads/{channel}', 'ThreadController@index');
@@ -29,6 +30,11 @@ Route::post('threads', 'ThreadController@store');
 
 Route::get('profiles/{user}', 'ProfileController@show')->name('profile');
 
+// Reply
 Route::post('threads/{channel}/{thread}/replies', 'ReplyController@store');
+Route::delete('replies/{reply}', 'ReplyController@destroy');
+Route::patch('replies/{reply}', 'ReplyController@update');
+
+// Favorites
 Route::post('replies/{reply}/favorites', 'FavoritesController@store');
 
